@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import LanguageSwitcher from "./LanguageSwitcher";
 import ThemeToggle from "./ThemeToggle";
 
@@ -12,6 +13,7 @@ type User = {
 
 export default function Navbar() {
   const [user, setUser] = useState<User | null>(null);
+  const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
     function loadUser() {
@@ -33,6 +35,13 @@ export default function Navbar() {
     };
   }, []);
 
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 6);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
   function logout() {
     localStorage.removeItem("auth-user");
     setUser(null);
@@ -40,73 +49,77 @@ export default function Navbar() {
   }
 
   return (
-    <header className="sticky top-0 z-50 bg-white/80 dark:bg-gray-950/80 backdrop-blur border-b border-gray-100 dark:border-gray-800">
-      <nav className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
-        <a href="/" className="text-2xl font-bold text-gray-900 dark:text-white">
-          Fazyl<span className="text-blue-600">Academy</span>
-        </a>
+    <header
+      data-scrolled={scrolled}
+      className="nav-shell sticky top-0 z-50 border-b border-border/80 bg-card/75 backdrop-blur-md dark:bg-card/70"
+    >
+      <nav className="max-w-6xl mx-auto px-6 py-4 flex flex-wrap items-center justify-between gap-y-3 gap-x-4">
+        <Link
+          href="/"
+          className="font-display text-2xl font-semibold tracking-tight text-foreground transition-colors duration-300 ease-out hover:text-accent"
+        >
+          Fazyl<span className="text-accent">Academy</span>
+        </Link>
 
-        <div className="flex items-center gap-4 text-sm font-medium text-gray-900 dark:text-gray-100">
-          <a href="/" className="hover:text-blue-600 transition">
+        <div className="flex flex-wrap items-center justify-end gap-x-1 gap-y-2 text-sm font-medium text-foreground/90">
+          <Link href="/" className="nav-link px-2 py-1 rounded-lg">
             Home
-          </a>
+          </Link>
 
-          <a href="/courses" className="hover:text-blue-600 transition">
+          <Link href="/courses" className="nav-link px-2 py-1 rounded-lg">
             Courses
-          </a>
+          </Link>
 
-          <a href="/search" className="hover:text-blue-600 transition">
+          <Link href="/search" className="nav-link px-2 py-1 rounded-lg">
             Search
-          </a>
+          </Link>
 
           {user && (
-            <a href="/dashboard" className="hover:text-blue-600 transition">
+            <Link href="/dashboard" className="nav-link px-2 py-1 rounded-lg">
               Dashboard
-            </a>
+            </Link>
           )}
 
-          <a href="/pricing" className="hover:text-blue-600 transition">
+          <Link href="/pricing" className="nav-link px-2 py-1 rounded-lg">
             Pricing
-          </a>
+          </Link>
 
           {user && (
-            <a href="/certificate" className="hover:text-blue-600 transition">
+            <Link href="/certificate" className="nav-link px-2 py-1 rounded-lg">
               Certificate
-            </a>
+            </Link>
           )}
 
-          <a href="/admin" className="hover:text-blue-600 transition">
+          <Link href="/admin" className="nav-link px-2 py-1 rounded-lg">
             Admin
-          </a>
+          </Link>
 
-          <LanguageSwitcher />
-
-          <ThemeToggle />
+          <div className="flex items-center gap-2 pl-1 border-l border-border/70 ml-1">
+            <LanguageSwitcher />
+            <ThemeToggle />
+          </div>
 
           {user ? (
-            <div className="flex items-center gap-3">
-              <a
+            <div className="flex items-center gap-2 pl-2">
+              <Link
                 href="/profile"
-                className="bg-blue-600 text-white px-5 py-2 rounded-xl hover:bg-blue-700 transition"
+                className="btn-primary px-5 py-2 rounded-xl text-sm"
               >
                 Profile
-              </a>
+              </Link>
 
               <button
                 type="button"
                 onClick={logout}
-                className="bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white px-4 py-2 rounded-xl hover:bg-gray-200 dark:hover:bg-gray-700 transition"
+                className="rounded-xl px-4 py-2 text-sm font-semibold text-foreground bg-accent-soft/80 border border-border hover:border-accent/40 transition-all duration-300 ease-out hover:bg-accent-soft"
               >
                 Logout
               </button>
             </div>
           ) : (
-            <a
-              href="/login"
-              className="bg-gray-900 text-white px-5 py-2 rounded-xl hover:bg-blue-600 transition"
-            >
+            <Link href="/login" className="btn-primary px-5 py-2 rounded-xl text-sm ml-1">
               Login
-            </a>
+            </Link>
           )}
         </div>
       </nav>

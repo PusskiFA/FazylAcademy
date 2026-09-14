@@ -40,14 +40,15 @@ export default function LessonCompleteButton({ courseId, lessonId }: Props) {
 
   return (
     <button
+      type="button"
       onClick={toggleComplete}
       className={
         isCompleted
-          ? "w-full bg-green-600 text-white rounded-xl py-3 font-semibold hover:bg-green-700 transition"
-          : "w-full bg-blue-600 text-white rounded-xl py-3 font-semibold hover:bg-blue-700 transition"
+          ? "w-full rounded-xl bg-deep py-3 font-semibold text-on-deep transition-all duration-300 ease-out hover:bg-deep-hover"
+          : "btn-primary w-full py-3"
       }
     >
-      {isCompleted ? "✅ Completed" : "Mark as completed"}
+      {isCompleted ? "Completed" : "Mark as completed"}
     </button>
   );
 }

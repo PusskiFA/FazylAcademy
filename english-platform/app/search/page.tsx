@@ -2,6 +2,7 @@
 
 import { courses } from "@/data/courses";
 import { lessons } from "@/data/lessons";
+import Link from "next/link";
 import { useState } from "react";
 
 export default function SearchPage() {
@@ -28,103 +29,90 @@ export default function SearchPage() {
   const hasSearch = query.trim().length > 0;
 
   return (
-    <main className="min-h-screen bg-gradient-to-b from-blue-50 via-white to-blue-50 dark:from-gray-950 dark:via-gray-900 dark:to-gray-950 text-gray-900 dark:text-white transition-colors">
-      <section className="max-w-6xl mx-auto px-6 py-14">
-        <div className="mb-10">
-          <p className="text-blue-600 dark:text-blue-300 font-semibold mb-2">
+    <main className="page-shell">
+      <section className="mx-auto max-w-6xl px-6 py-14 md:py-16">
+        <div className="mb-12 max-w-2xl">
+          <p className="font-display mb-3 text-sm font-semibold uppercase tracking-widest text-accent">
             Search
           </p>
 
-          <h1 className="text-4xl font-bold mb-3">
+          <h1 className="font-display text-4xl font-semibold tracking-tight text-foreground md:text-5xl mb-4">
             Find courses and lessons
           </h1>
 
-          <p className="text-gray-600 dark:text-gray-300 max-w-2xl">
-            Курс немесе сабақ атын жаз. Мысалы: Alphabet, Grammar, Present
-            Simple.
+          <p className="text-muted text-lg leading-relaxed">
+            Курс немесе сабақ атын жаз. Мысалы: Alphabet, Grammar, Present Simple.
           </p>
         </div>
 
-        <div className="bg-white dark:bg-gray-900 border border-blue-100 dark:border-gray-800 rounded-3xl p-6 shadow-sm mb-8">
+        <div className="mb-8 rounded-3xl border border-border bg-card p-2 shadow-sm transition-shadow duration-500 focus-within:border-accent/35 focus-within:shadow-md md:p-2">
           <input
             type="text"
             placeholder="Search..."
             value={query}
             onChange={(event) => setQuery(event.target.value)}
-            className="w-full bg-white dark:bg-gray-950 text-gray-900 dark:text-white border border-blue-100 dark:border-gray-700 rounded-2xl px-5 py-4 outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full rounded-2xl border-0 bg-transparent px-5 py-4 text-base text-foreground outline-none placeholder:text-muted"
           />
         </div>
 
         {!hasSearch ? (
-          <div className="bg-white dark:bg-gray-900 border border-blue-100 dark:border-gray-800 rounded-3xl p-6 shadow-sm">
-            <h2 className="text-2xl font-bold mb-2">Start searching</h2>
-            <p className="text-gray-600 dark:text-gray-300">
-              Іздеу үшін жоғарыдағы input-қа сөз жаз.
-            </p>
+          <div className="rounded-3xl border border-border bg-card p-8 shadow-sm">
+            <h2 className="font-display mb-2 text-2xl font-semibold text-foreground">Start searching</h2>
+            <p className="text-muted">Іздеу үшін жоғарыдағы input-қа сөз жаз.</p>
           </div>
         ) : (
-          <div className="grid md:grid-cols-2 gap-6">
-            <div className="bg-white dark:bg-gray-900 border border-blue-100 dark:border-gray-800 rounded-3xl p-6 shadow-sm">
-              <h2 className="text-2xl font-bold mb-5">Courses</h2>
+          <div className="grid gap-6 md:grid-cols-2">
+            <div className="rounded-3xl border border-border bg-card p-6 shadow-sm md:p-8">
+              <h2 className="font-display mb-5 text-2xl font-semibold text-foreground">Courses</h2>
 
               {filteredCourses.length === 0 ? (
-                <p className="text-gray-600 dark:text-gray-300">
-                  No courses found.
-                </p>
+                <p className="text-muted">No courses found.</p>
               ) : (
                 <div className="space-y-4">
                   {filteredCourses.map((course) => (
-                    <a
+                    <Link
                       key={course.id}
                       href={`/courses/${course.id}`}
-                      className="block bg-blue-50 dark:bg-blue-900/30 rounded-2xl p-4 hover:bg-blue-100 dark:hover:bg-blue-900/50 transition"
+                      className="block rounded-2xl border border-transparent bg-accent-soft/35 p-4 transition-all duration-300 ease-out hover:border-accent/20 hover:bg-accent-soft dark:bg-accent-soft/15"
                     >
                       <div className="flex items-center justify-between">
                         <div>
-                          <h3 className="font-bold">{course.title}</h3>
-                          <p className="text-sm text-gray-600 dark:text-gray-300">
+                          <h3 className="font-semibold text-foreground">{course.title}</h3>
+                          <p className="text-sm text-muted">
                             {course.level} • {course.lessons} lessons
                           </p>
                         </div>
 
-                        <span className="text-blue-600 dark:text-blue-300 font-semibold">
-                          →
-                        </span>
+                        <span className="font-semibold text-accent">→</span>
                       </div>
-                    </a>
+                    </Link>
                   ))}
                 </div>
               )}
             </div>
 
-            <div className="bg-white dark:bg-gray-900 border border-blue-100 dark:border-gray-800 rounded-3xl p-6 shadow-sm">
-              <h2 className="text-2xl font-bold mb-5">Lessons</h2>
+            <div className="rounded-3xl border border-border bg-card p-6 shadow-sm md:p-8">
+              <h2 className="font-display mb-5 text-2xl font-semibold text-foreground">Lessons</h2>
 
               {filteredLessons.length === 0 ? (
-                <p className="text-gray-600 dark:text-gray-300">
-                  No lessons found.
-                </p>
+                <p className="text-muted">No lessons found.</p>
               ) : (
                 <div className="space-y-4">
                   {filteredLessons.map((lesson) => (
-                    <a
+                    <Link
                       key={lesson.id}
                       href={`/lessons/${lesson.id}`}
-                      className="block bg-blue-50 dark:bg-blue-900/30 rounded-2xl p-4 hover:bg-blue-100 dark:hover:bg-blue-900/50 transition"
+                      className="block rounded-2xl border border-transparent bg-accent-soft/35 p-4 transition-all duration-300 ease-out hover:border-accent/20 hover:bg-accent-soft dark:bg-accent-soft/15"
                     >
-                      <div className="flex items-center justify-between">
+                      <div className="flex items-center justify-between gap-3">
                         <div>
-                          <h3 className="font-bold">{lesson.title}</h3>
-                          <p className="text-sm text-gray-600 dark:text-gray-300">
-                            {lesson.description}
-                          </p>
+                          <h3 className="font-semibold text-foreground">{lesson.title}</h3>
+                          <p className="text-sm text-muted">{lesson.description}</p>
                         </div>
 
-                        <span className="text-blue-600 dark:text-blue-300 font-semibold">
-                          →
-                        </span>
+                        <span className="shrink-0 font-semibold text-accent">→</span>
                       </div>
-                    </a>
+                    </Link>
                   ))}
                 </div>
               )}

@@ -1,67 +1,51 @@
+import Link from "next/link";
+
 export default function RegisterPage() {
   return (
-    <main className="min-h-screen bg-gradient-to-b from-blue-50 via-white to-blue-50 dark:from-gray-950 dark:via-gray-900 dark:to-gray-950 text-gray-900 dark:text-white transition-colors">
-      <section className="max-w-md mx-auto px-6 py-16">
-        <div className="bg-white dark:bg-gray-900 border border-blue-100 dark:border-gray-800 rounded-2xl p-8 shadow-sm">
-          <h1 className="text-3xl font-bold mb-2">Register</h1>
+    <main className="page-shell">
+      <section className="mx-auto max-w-md px-6 py-16 md:py-20">
+        <div className="card-elevated rounded-[1.35rem] p-8 md:p-10">
+          <h1 className="font-display text-3xl font-semibold tracking-tight text-foreground mb-2">
+            Register
+          </h1>
 
-          <p className="text-gray-600 dark:text-gray-300 mb-8">
+          <p className="text-muted mb-8 leading-relaxed">
             Жаңа аккаунт ашып, ағылшын үйренуді баста.
           </p>
 
           <form className="space-y-5">
             <div>
-              <label className="block text-sm font-medium mb-2">
-                Full name
-              </label>
+              <label className="mb-2 block text-sm font-semibold text-foreground">Full name</label>
 
               <input
                 type="text"
                 placeholder="Alihan Fazylgaliov"
-                className="w-full bg-white dark:bg-gray-950 text-gray-900 dark:text-white border border-blue-100 dark:border-gray-700 rounded-xl px-4 py-3 outline-none focus:ring-2 focus:ring-blue-500"
+                className="input-field"
               />
             </div>
 
             <div>
-              <label className="block text-sm font-medium mb-2">
-                Email
-              </label>
+              <label className="mb-2 block text-sm font-semibold text-foreground">Email</label>
 
-              <input
-                type="email"
-                placeholder="student@gmail.com"
-                className="w-full bg-white dark:bg-gray-950 text-gray-900 dark:text-white border border-blue-100 dark:border-gray-700 rounded-xl px-4 py-3 outline-none focus:ring-2 focus:ring-blue-500"
-              />
+              <input type="email" placeholder="student@gmail.com" className="input-field" />
             </div>
 
             <div>
-              <label className="block text-sm font-medium mb-2">
-                Password
-              </label>
+              <label className="mb-2 block text-sm font-semibold text-foreground">Password</label>
 
-              <input
-                type="password"
-                placeholder="••••••••"
-                className="w-full bg-white dark:bg-gray-950 text-gray-900 dark:text-white border border-blue-100 dark:border-gray-700 rounded-xl px-4 py-3 outline-none focus:ring-2 focus:ring-blue-500"
-              />
+              <input type="password" placeholder="••••••••" className="input-field" />
             </div>
 
-            <button
-              type="button"
-              className="w-full bg-blue-600 text-white rounded-xl py-3 font-medium hover:bg-blue-700 transition"
-            >
+            <button type="button" className="btn-primary w-full rounded-xl py-3 text-sm">
               Create account
             </button>
           </form>
 
-          <p className="text-sm text-gray-600 dark:text-gray-300 mt-6">
+          <p className="mt-6 text-sm text-muted">
             Аккаунтың бар ма?{" "}
-            <a
-              href="/login"
-              className="text-blue-600 dark:text-blue-300 font-medium"
-            >
+            <Link href="/login" className="font-semibold text-accent transition-colors hover:text-accent-hover">
               Login
-            </a>
+            </Link>
           </p>
         </div>
       </section>

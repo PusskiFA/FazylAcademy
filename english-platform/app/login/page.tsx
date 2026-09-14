@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useState } from "react";
 
 export default function LoginPage() {
@@ -34,61 +35,52 @@ export default function LoginPage() {
   }
 
   return (
-    <main className="min-h-screen bg-gradient-to-b from-blue-50 via-white to-blue-50 dark:from-gray-950 dark:via-gray-900 dark:to-gray-950 text-gray-900 dark:text-white transition-colors">
-      <section className="max-w-md mx-auto px-6 py-16">
-        <div className="bg-white dark:bg-gray-900 border border-blue-100 dark:border-gray-800 rounded-2xl p-8 shadow-sm">
-          <h1 className="text-3xl font-bold mb-2">Login</h1>
+    <main className="page-shell">
+      <section className="mx-auto max-w-md px-6 py-16 md:py-20">
+        <div className="card-elevated rounded-[1.35rem] p-8 md:p-10">
+          <h1 className="font-display text-3xl font-semibold tracking-tight text-foreground mb-2">
+            Login
+          </h1>
 
-          <p className="text-gray-600 dark:text-gray-300 mb-8">
+          <p className="text-muted mb-8 leading-relaxed">
             Аккаунтыңа кіріп, сабақтарды жалғастыр.
           </p>
 
           <form className="space-y-5">
             <div>
-              <label className="block text-sm font-medium mb-2">
-                Email
-              </label>
+              <label className="mb-2 block text-sm font-semibold text-foreground">Email</label>
 
               <input
                 type="email"
                 placeholder="student@gmail.com"
                 value={email}
                 onChange={(event) => setEmail(event.target.value)}
-                className="w-full bg-white dark:bg-gray-950 text-gray-900 dark:text-white border border-blue-100 dark:border-gray-700 rounded-xl px-4 py-3 outline-none focus:ring-2 focus:ring-blue-500"
+                className="input-field"
               />
             </div>
 
             <div>
-              <label className="block text-sm font-medium mb-2">
-                Password
-              </label>
+              <label className="mb-2 block text-sm font-semibold text-foreground">Password</label>
 
               <input
                 type="password"
                 placeholder="••••••••"
                 value={password}
                 onChange={(event) => setPassword(event.target.value)}
-                className="w-full bg-white dark:bg-gray-950 text-gray-900 dark:text-white border border-blue-100 dark:border-gray-700 rounded-xl px-4 py-3 outline-none focus:ring-2 focus:ring-blue-500"
+                className="input-field"
               />
             </div>
 
-            <button
-              type="button"
-              onClick={login}
-              className="w-full bg-blue-600 text-white rounded-xl py-3 font-medium hover:bg-blue-700 transition"
-            >
+            <button type="button" onClick={login} className="btn-primary w-full rounded-xl py-3 text-sm">
               Sign in
             </button>
           </form>
 
-          <p className="text-sm text-gray-600 dark:text-gray-300 mt-6">
+          <p className="mt-6 text-sm text-muted">
             Аккаунтың жоқ па?{" "}
-            <a
-              href="/register"
-              className="text-blue-600 dark:text-blue-300 font-medium"
-            >
+            <Link href="/register" className="font-semibold text-accent transition-colors hover:text-accent-hover">
               Register
-            </a>
+            </Link>
           </p>
         </div>
       </section>

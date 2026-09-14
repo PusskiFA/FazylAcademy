@@ -45,10 +45,10 @@ export default function Quiz({ questions }: Props) {
   }, 0);
 
   return (
-    <div className="bg-white border border-blue-100 rounded-3xl p-6 shadow-sm">
-      <h2 className="text-2xl font-bold mb-2">Quiz</h2>
+    <div className="rounded-3xl border border-border bg-card p-6 shadow-sm md:p-8">
+      <h2 className="font-display text-2xl font-semibold text-foreground mb-2">Quiz</h2>
 
-      <p className="text-gray-600 mb-6">
+      <p className="text-muted mb-6 leading-relaxed">
         Сабақты түсінгеніңді тексеру үшін сұрақтарға жауап бер.
       </p>
 
@@ -56,9 +56,9 @@ export default function Quiz({ questions }: Props) {
         {questions.map((question, questionIndex) => (
           <div
             key={question.question}
-            className="bg-blue-50 rounded-2xl p-5"
+            className="rounded-2xl border border-border/80 bg-accent-soft/50 p-5 dark:bg-accent-soft/25"
           >
-            <h3 className="font-bold mb-4">
+            <h3 className="mb-4 font-semibold text-foreground">
               {questionIndex + 1}. {question.question}
             </h3>
 
@@ -69,21 +69,21 @@ export default function Quiz({ questions }: Props) {
                 const isWrong = isSubmitted && isSelected && !isCorrect;
 
                 let optionClass =
-                  "w-full text-left rounded-xl border px-4 py-3 bg-white hover:bg-blue-100 transition";
+                  "w-full text-left rounded-xl border border-border px-4 py-3 bg-card text-foreground transition-all duration-300 ease-out hover:border-accent/40 hover:bg-accent-soft/40";
 
-                if (isSelected) {
+                if (isSelected && !isSubmitted) {
                   optionClass =
-                    "w-full text-left rounded-xl border px-4 py-3 bg-blue-600 text-white transition";
+                    "w-full text-left rounded-xl border border-accent px-4 py-3 bg-accent text-on-accent transition-all duration-300 ease-out shadow-md";
                 }
 
                 if (isSubmitted && isCorrect) {
                   optionClass =
-                    "w-full text-left rounded-xl border px-4 py-3 bg-green-600 text-white transition";
+                    "w-full text-left rounded-xl border border-accent/45 px-4 py-3 bg-accent text-on-accent transition-all duration-300";
                 }
 
                 if (isWrong) {
                   optionClass =
-                    "w-full text-left rounded-xl border px-4 py-3 bg-red-500 text-white transition";
+                    "w-full text-left rounded-xl border border-rose-600/40 px-4 py-3 bg-rose-600 text-white transition-all duration-300";
                 }
 
                 return (
@@ -106,18 +106,18 @@ export default function Quiz({ questions }: Props) {
         <button
           type="button"
           onClick={checkQuiz}
-          className="mt-6 w-full bg-blue-600 text-white rounded-xl py-3 font-semibold hover:bg-blue-700 transition"
+          className="btn-primary mt-6 w-full rounded-xl py-3 text-sm"
         >
           Check answers
         </button>
       ) : (
         <div className="mt-6">
-          <div className="bg-green-50 border border-green-100 rounded-2xl p-5 mb-4">
-            <h3 className="text-xl font-bold text-green-700 mb-1">
+          <div className="mb-4 rounded-2xl border border-accent/25 bg-accent-soft/60 p-5 dark:bg-accent-soft/25">
+            <h3 className="mb-1 text-xl font-semibold text-accent-soft-fg">
               Your score: {score}/{questions.length}
             </h3>
 
-            <p className="text-gray-600">
+            <p className="text-muted">
               {score === questions.length
                 ? "Керемет! Барлығы дұрыс."
                 : "Жақсы! Қате жауаптарды қарап, қайта көр."}
@@ -127,7 +127,7 @@ export default function Quiz({ questions }: Props) {
           <button
             type="button"
             onClick={resetQuiz}
-            className="w-full bg-gray-900 text-white rounded-xl py-3 font-semibold hover:bg-blue-600 transition"
+            className="w-full rounded-xl border border-border bg-foreground py-3 font-semibold text-background transition-all duration-300 ease-out hover:bg-accent hover:text-on-accent"
           >
             Try again
           </button>

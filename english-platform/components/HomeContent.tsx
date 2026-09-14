@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import { translations } from "@/data/translations";
 
 type Language = "kz" | "ru" | "en";
@@ -19,56 +20,68 @@ export default function HomeContent() {
   const t = translations[language];
 
   return (
-    <main className="min-h-screen bg-gradient-to-b from-blue-50 via-white to-white dark:from-gray-950 dark:via-gray-900 dark:to-gray-950 text-gray-900 dark:text-white transition-colors">
-      <section className="max-w-6xl mx-auto px-6 py-20">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
+    <main className="page-shell overflow-x-hidden">
+      <section className="max-w-6xl mx-auto px-6 py-16 md:py-24">
+        <div className="grid lg:grid-cols-[1.05fr_0.95fr] gap-14 lg:gap-20 items-center">
           <div>
-            <div className="inline-flex items-center rounded-full bg-blue-100 dark:bg-blue-900/40 px-4 py-2 text-sm font-medium text-blue-700 dark:text-blue-300 mb-6">
+            <div className="animate-rise stagger-1 mb-5 max-w-xs">
+              <div className="hero-line w-full" />
+            </div>
+
+            <div className="animate-rise stagger-1 inline-flex items-center rounded-full border border-border bg-card/90 px-4 py-2 text-sm font-semibold text-accent-soft-fg backdrop-blur-sm shadow-sm">
               {t.heroBadge}
             </div>
 
-            <h1 className="text-4xl md:text-6xl font-bold leading-tight mb-6">
+            <h1 className="font-display animate-rise stagger-2 mt-6 text-4xl md:text-6xl lg:text-[3.35rem] font-semibold leading-[1.08] tracking-tight text-foreground">
               {t.heroTitle}
             </h1>
 
-            <p className="text-lg text-gray-600 dark:text-gray-300 mb-8 leading-relaxed">
+            <p className="animate-rise stagger-3 mt-6 text-lg md:text-xl text-muted leading-relaxed max-w-xl">
               {t.heroText}
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-4">
-              <a
-                href="/courses"
-                className="bg-blue-600 text-white px-7 py-4 rounded-2xl font-semibold text-center hover:bg-blue-700 transition"
-              >
+            <div className="animate-rise stagger-4 mt-10 flex flex-col sm:flex-row gap-4">
+              <Link href="/courses" className="btn-primary px-8 py-4 rounded-2xl text-center text-base">
                 {t.startLearning}
-              </a>
+              </Link>
 
-              <a
-                href="/register"
-                className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 px-7 py-4 rounded-2xl font-semibold text-center hover:bg-gray-50 dark:hover:bg-gray-800 transition"
-              >
+              <Link href="/register" className="btn-ghost px-8 py-4 rounded-2xl text-center text-base">
                 {t.createAccount}
-              </a>
+              </Link>
             </div>
           </div>
 
-          <div className="bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 rounded-3xl p-8 shadow-xl transition-colors">
-            <h2 className="text-2xl font-bold mb-6">{t.whatYouLearn}</h2>
+          <div className="animate-rise stagger-3 relative">
+            <div
+              aria-hidden
+              className="pointer-events-none absolute -inset-4 rounded-[2rem] bg-gradient-to-br from-accent/12 via-transparent to-accent-soft/40 blur-2xl opacity-80 dark:opacity-60"
+            />
+            <div className="card-elevated relative rounded-[1.75rem] p-8 md:p-10">
+              <h2 className="font-display text-2xl md:text-3xl font-semibold text-foreground mb-8">
+                {t.whatYouLearn}
+              </h2>
 
-            <div className="space-y-4">
-              <div className="rounded-2xl bg-blue-50 dark:bg-blue-900/30 p-5 transition-colors">
-                <h3 className="font-bold text-lg mb-1">{t.grammar}</h3>
-                <p className="text-gray-600 dark:text-gray-300">{t.grammarText}</p>
-              </div>
+              <div className="space-y-4">
+                <div className="feature-tile animate-fade stagger-2">
+                  <h3 className="font-display text-lg font-semibold text-foreground mb-1">
+                    {t.grammar}
+                  </h3>
+                  <p className="text-muted text-[0.95rem] leading-relaxed">{t.grammarText}</p>
+                </div>
 
-              <div className="rounded-2xl bg-green-50 dark:bg-green-900/30 p-5 transition-colors">
-                <h3 className="font-bold text-lg mb-1">{t.speaking}</h3>
-                <p className="text-gray-600 dark:text-gray-300">{t.speakingText}</p>
-              </div>
+                <div className="feature-tile animate-fade stagger-3">
+                  <h3 className="font-display text-lg font-semibold text-foreground mb-1">
+                    {t.speaking}
+                  </h3>
+                  <p className="text-muted text-[0.95rem] leading-relaxed">{t.speakingText}</p>
+                </div>
 
-              <div className="rounded-2xl bg-purple-50 dark:bg-purple-900/30 p-5 transition-colors">
-                <h3 className="font-bold text-lg mb-1">{t.materials}</h3>
-                <p className="text-gray-600 dark:text-gray-300">{t.materialsText}</p>
+                <div className="feature-tile animate-fade stagger-4">
+                  <h3 className="font-display text-lg font-semibold text-foreground mb-1">
+                    {t.materials}
+                  </h3>
+                  <p className="text-muted text-[0.95rem] leading-relaxed">{t.materialsText}</p>
+                </div>
               </div>
             </div>
           </div>

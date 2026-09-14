@@ -2,6 +2,7 @@
 
 import { courses } from "@/data/courses";
 import { lessons } from "@/data/lessons";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 
 export default function DashboardPage() {
@@ -35,106 +36,90 @@ export default function DashboardPage() {
   );
 
   return (
-    <main className="min-h-screen bg-gradient-to-b from-blue-50 via-white to-blue-50 dark:from-gray-950 dark:via-gray-900 dark:to-gray-950 text-gray-900 dark:text-white transition-colors">
-      <section className="max-w-6xl mx-auto px-6 py-14">
-        <div className="mb-10">
-          <p className="text-blue-600 dark:text-blue-300 font-semibold mb-2">
+    <main className="page-shell">
+      <section className="mx-auto max-w-6xl px-6 py-14 md:py-16">
+        <div className="mb-12 max-w-2xl">
+          <p className="font-display mb-3 text-sm font-semibold uppercase tracking-widest text-accent">
             Dashboard
           </p>
 
-          <h1 className="text-4xl font-bold mb-3">
+          <h1 className="font-display text-4xl font-semibold tracking-tight text-foreground md:text-5xl mb-4">
             My learning progress
           </h1>
 
-          <p className="text-gray-600 dark:text-gray-300 max-w-2xl">
+          <p className="text-muted text-lg leading-relaxed">
             Бұл жерде сен өз прогрессіңді, аяқталған сабақтарыңды және келесі сабақты көресің.
           </p>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-6 mb-8">
-          <div className="bg-white dark:bg-gray-900 border border-blue-100 dark:border-gray-800 rounded-3xl p-6 shadow-sm">
-            <p className="text-gray-500 dark:text-gray-400 mb-2">
-              Completed lessons
-            </p>
-
-            <h2 className="text-4xl font-bold text-blue-600 dark:text-blue-300">
-              {completedCount}
-            </h2>
+        <div className="mb-8 grid gap-6 md:grid-cols-3">
+          <div className="rounded-3xl border border-border bg-card p-6 shadow-sm transition-shadow duration-500 hover:shadow-md">
+            <p className="mb-2 text-sm font-medium text-muted">Completed lessons</p>
+            <h2 className="font-display text-4xl font-semibold text-accent">{completedCount}</h2>
           </div>
 
-          <div className="bg-white dark:bg-gray-900 border border-blue-100 dark:border-gray-800 rounded-3xl p-6 shadow-sm">
-            <p className="text-gray-500 dark:text-gray-400 mb-2">
-              Total lessons
-            </p>
-
-            <h2 className="text-4xl font-bold text-blue-600 dark:text-blue-300">
-              {totalLessons}
-            </h2>
+          <div className="rounded-3xl border border-border bg-card p-6 shadow-sm transition-shadow duration-500 hover:shadow-md">
+            <p className="mb-2 text-sm font-medium text-muted">Total lessons</p>
+            <h2 className="font-display text-4xl font-semibold text-accent">{totalLessons}</h2>
           </div>
 
-          <div className="bg-white dark:bg-gray-900 border border-blue-100 dark:border-gray-800 rounded-3xl p-6 shadow-sm">
-            <p className="text-gray-500 dark:text-gray-400 mb-2">
-              Progress
-            </p>
-
-            <h2 className="text-4xl font-bold text-blue-600 dark:text-blue-300">
-              {progress}%
-            </h2>
+          <div className="rounded-3xl border border-border bg-card p-6 shadow-sm transition-shadow duration-500 hover:shadow-md">
+            <p className="mb-2 text-sm font-medium text-muted">Progress</p>
+            <h2 className="font-display text-4xl font-semibold text-accent">{progress}%</h2>
           </div>
         </div>
 
-        <div className="bg-white dark:bg-gray-900 border border-blue-100 dark:border-gray-800 rounded-3xl p-6 shadow-sm mb-8">
-          <div className="flex items-center justify-between mb-3">
-            <h2 className="text-2xl font-bold">Overall progress</h2>
-
-            <span className="text-blue-600 dark:text-blue-300 font-semibold">
+        <div className="mb-8 rounded-3xl border border-border bg-card p-6 shadow-sm md:p-8">
+          <div className="mb-3 flex items-center justify-between">
+            <h2 className="font-display text-2xl font-semibold text-foreground">Overall progress</h2>
+            <span className="font-semibold text-accent">
               {completedCount}/{totalLessons}
             </span>
           </div>
 
-          <div className="w-full bg-blue-100 dark:bg-gray-800 rounded-full h-4 overflow-hidden">
+          <div className="h-4 w-full overflow-hidden rounded-full bg-accent-soft">
             <div
-              className="bg-blue-600 h-4 rounded-full transition-all"
+              className="h-4 rounded-full bg-accent transition-[width] duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]"
               style={{ width: `${progress}%` }}
             />
           </div>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-6">
-          <div className="bg-white dark:bg-gray-900 border border-blue-100 dark:border-gray-800 rounded-3xl p-6 shadow-sm">
-            <h2 className="text-2xl font-bold mb-3">Continue learning</h2>
+        <div className="grid gap-6 md:grid-cols-2">
+          <div className="rounded-3xl border border-border bg-card p-6 shadow-sm md:p-8">
+            <h2 className="font-display mb-3 text-2xl font-semibold text-foreground">Continue learning</h2>
 
             {nextLesson ? (
               <>
-                <p className="text-gray-600 dark:text-gray-300 mb-5">
-                  Келесі сабақ: <b>{nextLesson.title}</b>
+                <p className="mb-5 text-muted leading-relaxed">
+                  Келесі сабақ: <b className="text-foreground">{nextLesson.title}</b>
                 </p>
 
-                <a
+                <Link
                   href={`/lessons/${nextLesson.id}`}
-                  className="block text-center bg-blue-600 text-white rounded-xl py-3 font-semibold hover:bg-blue-700 transition"
+                  className="btn-primary block w-full rounded-xl py-3 text-center text-sm"
                 >
                   Continue lesson
-                </a>
+                </Link>
               </>
             ) : (
               <>
-                <p className="text-gray-600 dark:text-gray-300 mb-5">
+                <p className="mb-5 text-muted leading-relaxed">
                   Керемет! Барлық сабақтарды аяқтадың.
                 </p>
 
-                <a
+                <Link
                   href="/courses"
-                  className="block text-center bg-green-600 text-white rounded-xl py-3 font-semibold hover:bg-green-700 transition"
+                  className="block w-full rounded-xl bg-deep py-3 text-center text-sm font-semibold text-on-deep transition-all duration-300 ease-out hover:bg-deep-hover"
                 >
                   View courses
-                </a>
+                </Link>
               </>
             )}
           </div>
 
-          <div className="bg-white dark:bg-gray-900 border border-blue-100 dark:border-gray-800 rounded-3xl p-6 shadow-sm">
-            <h2 className="text-2xl font-bold mb-3">Courses</h2>
+          <div className="rounded-3xl border border-border bg-card p-6 shadow-sm md:p-8">
+            <h2 className="font-display mb-4 text-2xl font-semibold text-foreground">Courses</h2>
 
             <div className="space-y-3">
               {courses.map((course) => {
@@ -147,25 +132,25 @@ export default function DashboardPage() {
                 ).length;
 
                 return (
-                  <a
+                  <Link
                     key={course.id}
                     href={`/courses/${course.id}`}
-                    className="block bg-blue-50 dark:bg-blue-900/30 rounded-2xl p-4 hover:bg-blue-100 dark:hover:bg-blue-900/50 transition"
+                    className="block rounded-2xl border border-transparent bg-accent-soft/40 p-4 transition-all duration-300 ease-out hover:border-accent/25 hover:bg-accent-soft"
                   >
                     <div className="flex items-center justify-between">
                       <div>
-                        <h3 className="font-bold">{course.title}</h3>
+                        <h3 className="font-semibold text-foreground">{course.title}</h3>
 
-                        <p className="text-sm text-gray-600 dark:text-gray-300">
+                        <p className="text-sm text-muted">
                           {completedInCourse}/{courseLessons.length} lessons
                         </p>
                       </div>
 
-                      <span className="text-blue-600 dark:text-blue-300 font-semibold">
+                      <span className="font-semibold text-accent transition-transform duration-300 group-hover:translate-x-0.5">
                         →
                       </span>
                     </div>
-                  </a>
+                  </Link>
                 );
               })}
             </div>

@@ -32,24 +32,22 @@ export default function CourseProgress({ courseId, totalLessons }: Props) {
     totalLessons === 0 ? 0 : Math.round((completedCount / totalLessons) * 100);
 
   return (
-    <div className="bg-white border border-blue-100 rounded-3xl p-6 shadow-sm mb-8">
-      <div className="flex items-center justify-between mb-3">
-        <h2 className="text-xl font-bold">Your progress</h2>
-        <span className="text-blue-600 font-semibold">
+    <div className="card-elevated mb-8 rounded-3xl border border-border bg-card p-6 md:p-7 shadow-none hover:translate-y-0 hover:shadow-none">
+      <div className="mb-3 flex items-center justify-between">
+        <h2 className="font-display text-xl font-semibold text-foreground">Your progress</h2>
+        <span className="font-semibold text-accent">
           {completedCount}/{totalLessons} lessons
         </span>
       </div>
 
-      <div className="w-full bg-blue-100 rounded-full h-3 overflow-hidden">
+      <div className="h-3 w-full overflow-hidden rounded-full bg-accent-soft">
         <div
-          className="bg-blue-600 h-3 rounded-full transition-all"
+          className="h-3 rounded-full bg-accent transition-[width] duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]"
           style={{ width: `${progress}%` }}
         />
       </div>
 
-      <p className="text-gray-600 mt-3 text-sm">
-        {progress}% completed
-      </p>
+      <p className="mt-3 text-sm text-muted">{progress}% completed</p>
     </div>
   );
 }

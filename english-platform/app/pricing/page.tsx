@@ -1,52 +1,69 @@
 export default function PricingPage() {
   return (
-    <main className="min-h-screen bg-gradient-to-b from-blue-50 via-white to-blue-50 dark:from-gray-950 dark:via-gray-900 dark:to-gray-950 text-gray-900 dark:text-white transition-colors">
-      <section className="max-w-5xl mx-auto px-6 py-16">
-        <div className="text-center mb-12">
-          <p className="text-blue-600 dark:text-blue-300 font-semibold mb-2">
+    <main className="page-shell">
+      <section className="mx-auto max-w-5xl px-6 py-16 md:py-20">
+        <div className="mb-12 text-center">
+          <p className="font-display mb-3 text-sm font-semibold uppercase tracking-widest text-accent">
             Premium
           </p>
 
-          <h1 className="text-4xl font-bold mb-3">
+          <h1 className="font-display mx-auto max-w-2xl text-4xl font-semibold tracking-tight text-foreground md:text-5xl mb-4">
             Unlock all English lessons
           </h1>
 
-          <p className="text-gray-600 dark:text-gray-300">
+          <p className="mx-auto max-w-xl text-muted text-lg leading-relaxed">
             Premium access арқылы барлық сабақтарды, тесттерді және материалдарды аша аласың.
           </p>
         </div>
 
-        <div className="max-w-md mx-auto bg-white dark:bg-gray-900 border border-blue-100 dark:border-gray-800 rounded-3xl p-8 shadow-md">
-          <h2 className="text-2xl font-bold mb-2">Premium Plan</h2>
+        <div className="card-elevated mx-auto max-w-md rounded-3xl p-8 md:p-10">
+          <h2 className="font-display text-2xl font-semibold text-foreground mb-2">Premium Plan</h2>
 
-          <p className="text-gray-600 dark:text-gray-300 mb-6">
-            Барлық курстарға толық доступ.
-          </p>
+          <p className="text-muted mb-6 leading-relaxed">Барлық курстарға толық доступ.</p>
 
-          <div className="text-4xl font-bold mb-6">
+          <div className="mb-6 font-display text-4xl font-semibold tracking-tight text-foreground">
             1990 ₸
-            <span className="text-base text-gray-500 dark:text-gray-400 font-normal">
-              {" "}
-              / month
-            </span>
+            <span className="text-base font-normal text-muted"> / month</span>
           </div>
 
-          <ul className="space-y-3 text-gray-700 dark:text-gray-300 mb-8">
-            <li> Барлық premium сабақтар</li>
-            <li> Quiz және practice тапсырмалар</li>
-            <li> PDF / slides материалдар</li>
-            <li> Course progress</li>
-            <li> Certificate</li>
+          <ul className="mb-8 space-y-3 text-foreground/90">
+            <li className="flex gap-2">
+              <span className="text-accent" aria-hidden>
+                ✓
+              </span>
+              Барлық premium сабақтар
+            </li>
+            <li className="flex gap-2">
+              <span className="text-accent" aria-hidden>
+                ✓
+              </span>
+              Quiz және practice тапсырмалар
+            </li>
+            <li className="flex gap-2">
+              <span className="text-accent" aria-hidden>
+                ✓
+              </span>
+              PDF / slides материалдар
+            </li>
+            <li className="flex gap-2">
+              <span className="text-accent" aria-hidden>
+                ✓
+              </span>
+              Course progress
+            </li>
+            <li className="flex gap-2">
+              <span className="text-accent" aria-hidden>
+                ✓
+              </span>
+              Certificate
+            </li>
           </ul>
 
-          <button
-            type="button"
-            className="w-full bg-blue-600 text-white rounded-xl py-3 font-semibold hover:bg-blue-700 transition"
-          >
+          <button type="button" className="btn-primary w-full rounded-xl py-3 text-sm">
             Buy Premium
           </button>
 
-          <p className="text-sm text-gray-500 dark:text-gray-400 mt-4 text-center">
+          <p className="mt-4 text-center text-sm text-muted">
             Қазір бұл тек demo. Кейін Kaspi/Stripe төлем қосамыз.
           </p>
         </div>

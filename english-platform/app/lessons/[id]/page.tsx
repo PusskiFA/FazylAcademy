@@ -1,6 +1,7 @@
 import { lessons } from "@/data/lessons";
 import { quizzes } from "@/data/quizzes";
 import { currentUser } from "@/data/user";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import LessonCompleteButton from "@/components/LessonCompleteButton";
 import Quiz from "@/components/Quiz";
@@ -23,33 +24,32 @@ export default async function LessonPage({ params }: Props) {
 
   if (lesson.isPremium && !currentUser.isPremium) {
     return (
-      <main className="min-h-screen bg-gradient-to-b from-blue-50 via-white to-blue-50 text-gray-900">
-        <section className="max-w-3xl mx-auto px-6 py-20">
-          <div className="bg-white border border-yellow-200 rounded-3xl p-8 shadow-md text-center">
-            <div className="text-5xl mb-5">🔒</div>
+      <main className="page-shell">
+        <section className="mx-auto max-w-3xl px-6 py-20">
+          <div className="card-locked rounded-3xl p-10 text-center shadow-sm">
+            <div className="font-display mb-5 text-5xl text-accent" aria-hidden>
+              ◆
+            </div>
 
-            <h1 className="text-3xl font-bold mb-3">
+            <h1 className="font-display mb-3 text-3xl font-semibold text-foreground">
               This lesson is premium
             </h1>
 
-            <p className="text-gray-600 mb-8">
+            <p className="mb-8 text-muted leading-relaxed">
               Бұл сабақты көру үшін premium access керек.
             </p>
 
-            <a
-              href="/pricing"
-              className="inline-block bg-blue-600 text-white rounded-xl px-6 py-3 font-semibold hover:bg-blue-700 transition"
-            >
+            <Link href="/pricing" className="btn-primary inline-block rounded-xl px-8 py-3 text-sm">
               View premium plan
-            </a>
+            </Link>
 
-            <div className="mt-6">
-              <a
+            <div className="mt-8">
+              <Link
                 href={`/courses/${lesson.courseId}`}
-                className="text-blue-600 font-medium"
+                className="text-sm font-semibold text-accent transition-colors hover:text-accent-hover"
               >
                 ← Back to course
-              </a>
+              </Link>
             </div>
           </div>
         </section>
@@ -71,71 +71,63 @@ export default async function LessonPage({ params }: Props) {
   const quiz = quizzes.find((item) => item.lessonId === lesson.id);
 
   return (
-    <main className="min-h-screen bg-gradient-to-b from-blue-50 via-white to-blue-50 text-gray-900">
-      <section className="max-w-4xl mx-auto px-6 py-14">
-        <a
+    <main className="page-shell">
+      <section className="mx-auto max-w-4xl px-6 py-14">
+        <Link
           href={`/courses/${lesson.courseId}`}
-          className="text-blue-600 font-medium"
+          className="text-sm font-semibold text-accent transition-colors hover:text-accent-hover"
         >
           ← Back to lessons
-        </a>
+        </Link>
 
-        <div className="mt-8 mb-8">
-          <span className="bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-sm font-semibold">
+        <div className="mb-10 mt-8">
+          <span className="inline-block rounded-full bg-accent-soft px-3 py-1 text-xs font-semibold uppercase tracking-wide text-accent-soft-fg">
             {lesson.badge}
           </span>
 
-          <h1 className="text-4xl font-bold mt-5 mb-3">
+          <h1 className="font-display mt-5 text-4xl font-semibold tracking-tight text-foreground md:text-5xl">
             {lesson.shortTitle}
           </h1>
 
-          <p className="text-gray-600">{lesson.description}</p>
+          <p className="mt-4 text-lg text-muted leading-relaxed">{lesson.description}</p>
         </div>
 
         <div className="grid gap-6">
-          <div className="bg-white border border-blue-100 rounded-3xl p-6 shadow-sm">
-            <h2 className="text-2xl font-bold mb-3">Қазақша түсіндіру</h2>
-            <p className="text-gray-600 leading-relaxed">
-              {lesson.contentKz}
-            </p>
+          <div className="rounded-3xl border border-border bg-card p-6 shadow-sm md:p-8">
+            <h2 className="font-display mb-3 text-2xl font-semibold text-foreground">Қазақша түсіндіру</h2>
+            <p className="leading-relaxed text-muted">{lesson.contentKz}</p>
           </div>
 
-          <div className="bg-white border border-blue-100 rounded-3xl p-6 shadow-sm">
-            <h2 className="text-2xl font-bold mb-3">Русское объяснение</h2>
-            <p className="text-gray-600 leading-relaxed">
-              {lesson.contentRu}
-            </p>
+          <div className="rounded-3xl border border-border bg-card p-6 shadow-sm md:p-8">
+            <h2 className="font-display mb-3 text-2xl font-semibold text-foreground">Русское объяснение</h2>
+            <p className="leading-relaxed text-muted">{lesson.contentRu}</p>
           </div>
 
-          <div className="bg-white border border-blue-100 rounded-3xl p-6 shadow-sm">
-            <h2 className="text-2xl font-bold mb-3">Examples</h2>
+          <div className="rounded-3xl border border-border bg-card p-6 shadow-sm md:p-8">
+            <h2 className="font-display mb-4 text-2xl font-semibold text-foreground">Examples</h2>
 
-            <div className="grid sm:grid-cols-3 gap-4">
+            <div className="grid gap-4 sm:grid-cols-3">
               {lesson.examples.map((example) => (
                 <div
                   key={example.letter}
-                  className="bg-blue-50 rounded-2xl p-4 text-center"
+                  className="rounded-2xl border border-border bg-accent-soft/50 p-4 text-center transition-transform duration-300 hover:-translate-y-0.5 dark:bg-accent-soft/20"
                 >
-                  <p className="text-3xl font-bold text-blue-600">
-                    {example.letter}
-                  </p>
-                  <p className="text-gray-600">{example.word}</p>
+                  <p className="font-display text-3xl font-semibold text-accent">{example.letter}</p>
+                  <p className="text-sm text-muted">{example.word}</p>
                 </div>
               ))}
             </div>
           </div>
 
-          <div className="bg-white border border-blue-100 rounded-3xl p-6 shadow-sm">
-            <h2 className="text-2xl font-bold mb-3">Practice</h2>
+          <div className="rounded-3xl border border-border bg-card p-6 shadow-sm md:p-8">
+            <h2 className="font-display mb-3 text-2xl font-semibold text-foreground">Practice</h2>
 
-            <p className="text-gray-600 mb-4">
-              Мына мысалдарды дауыстап оқы:
-            </p>
+            <p className="mb-4 text-muted">Мына мысалдарды дауыстап оқы:</p>
 
-            <ul className="space-y-2 text-gray-700">
+            <ul className="space-y-2 text-foreground/90">
               {lesson.examples.map((example) => (
                 <li key={example.letter}>
-                  ✅ {example.letter} — {example.word}
+                  {example.letter} — {example.word}
                 </li>
               ))}
             </ul>
@@ -144,44 +136,36 @@ export default async function LessonPage({ params }: Props) {
           {quiz && <Quiz questions={quiz.questions} />}
         </div>
 
-        <div className="mt-8 bg-white border border-blue-100 rounded-3xl p-6 shadow-sm">
-          <h2 className="text-2xl font-bold mb-3">Lesson status</h2>
-          <p className="text-gray-600 mb-5">
-            Сабақты аяқтасаң, төмендегі кнопканы бас.
-          </p>
+        <div className="mt-8 rounded-3xl border border-border bg-card p-6 shadow-sm md:p-8">
+          <h2 className="font-display mb-3 text-2xl font-semibold text-foreground">Lesson status</h2>
+          <p className="mb-5 text-muted">Сабақты аяқтасаң, төмендегі кнопканы бас.</p>
 
-          <LessonCompleteButton
-            courseId={lesson.courseId}
-            lessonId={lesson.id}
-          />
+          <LessonCompleteButton courseId={lesson.courseId} lessonId={lesson.id} />
         </div>
 
-        <div className="mt-8 flex items-center justify-between gap-4">
+        <div className="mt-8 flex flex-wrap items-center justify-between gap-4">
           {previousLesson ? (
-            <a
+            <Link
               href={`/lessons/${previousLesson.id}`}
-              className="bg-white border border-blue-100 text-blue-600 px-5 py-3 rounded-xl font-semibold hover:bg-blue-50 transition"
+              className="btn-ghost rounded-xl px-5 py-3 text-sm font-semibold"
             >
               ← Previous lesson
-            </a>
+            </Link>
           ) : (
             <div />
           )}
 
           {nextLesson ? (
-            <a
-              href={`/lessons/${nextLesson.id}`}
-              className="bg-blue-600 text-white px-5 py-3 rounded-xl font-semibold hover:bg-blue-700 transition"
-            >
+            <Link href={`/lessons/${nextLesson.id}`} className="btn-primary rounded-xl px-5 py-3 text-sm">
               Next lesson →
-            </a>
+            </Link>
           ) : (
-            <a
+            <Link
               href={`/courses/${lesson.courseId}`}
-              className="bg-green-600 text-white px-5 py-3 rounded-xl font-semibold hover:bg-green-700 transition"
+              className="rounded-xl bg-deep px-5 py-3 text-sm font-semibold text-on-deep transition-colors duration-300 hover:bg-deep-hover"
             >
               Finish course
-            </a>
+            </Link>
           )}
         </div>
       </section>

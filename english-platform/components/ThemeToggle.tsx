@@ -32,29 +32,23 @@ export default function ThemeToggle() {
   }
 
   return (
-    <div className="flex items-center gap-1 bg-blue-50 dark:bg-gray-800 rounded-xl p-1">
+    <div className="segment dark:border-border/80" role="group" aria-label="Theme">
       <button
         type="button"
+        data-active={theme === "light"}
         onClick={setLightTheme}
-        className={
-          theme === "light"
-            ? "bg-blue-600 text-white px-3 py-1 rounded-lg text-sm font-semibold"
-            : "text-blue-600 dark:text-blue-300 px-3 py-1 rounded-lg text-sm font-semibold"
-        }
+        aria-pressed={theme === "light"}
       >
-        ☀️ Light
+        Light
       </button>
 
       <button
         type="button"
+        data-active={theme === "dark"}
         onClick={setDarkTheme}
-        className={
-          theme === "dark"
-            ? "bg-blue-600 text-white px-3 py-1 rounded-lg text-sm font-semibold"
-            : "text-blue-600 dark:text-blue-300 px-3 py-1 rounded-lg text-sm font-semibold"
-        }
+        aria-pressed={theme === "dark"}
       >
-        🌙 Dark
+        Dark
       </button>
     </div>
   );

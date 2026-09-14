@@ -15,84 +15,68 @@ const stats = [
 
 export default function AdminPage() {
   return (
-    <main className="min-h-screen bg-gradient-to-b from-blue-50 via-white to-blue-50 dark:from-gray-950 dark:via-gray-900 dark:to-gray-950 text-gray-900 dark:text-white transition-colors">
-      <section className="max-w-6xl mx-auto px-6 py-12">
-        <h1 className="text-3xl font-bold mb-2">Admin Panel</h1>
+    <main className="page-shell">
+      <section className="mx-auto max-w-6xl px-6 py-12 md:py-16">
+        <h1 className="font-display text-3xl font-semibold tracking-tight text-foreground md:text-4xl mb-3">
+          Admin Panel
+        </h1>
 
-        <p className="text-gray-600 dark:text-gray-300 mb-8">
+        <p className="mb-10 max-w-2xl text-muted text-lg leading-relaxed">
           Курстарды, сабақтарды және материалдарды осы жерден басқарасың.
         </p>
 
-        <div className="grid md:grid-cols-3 gap-6 mb-10">
+        <div className="mb-10 grid gap-6 md:grid-cols-3">
           {stats.map((item) => (
             <div
               key={item.title}
-              className="bg-white dark:bg-gray-900 border border-blue-100 dark:border-gray-800 rounded-2xl p-6 shadow-sm"
+              className="rounded-2xl border border-border bg-card p-6 shadow-sm transition-shadow duration-500 hover:shadow-md"
             >
-              <p className="text-gray-500 dark:text-gray-400 text-sm">
-                {item.title}
-              </p>
+              <p className="text-sm font-medium text-muted">{item.title}</p>
 
-              <h2 className="text-3xl font-bold mt-2 text-blue-600 dark:text-blue-300">
-                {item.value}
-              </h2>
+              <h2 className="font-display mt-2 text-3xl font-semibold text-accent">{item.value}</h2>
             </div>
           ))}
         </div>
 
-        <div className="bg-white dark:bg-gray-900 border border-blue-100 dark:border-gray-800 rounded-2xl p-6 shadow-sm">
-          <h2 className="text-2xl font-bold mb-4">Create new lesson</h2>
+        <div className="rounded-2xl border border-border bg-card p-6 shadow-sm md:p-8">
+          <h2 className="font-display mb-6 text-2xl font-semibold text-foreground">Create new lesson</h2>
 
           <form className="grid gap-5">
             <div>
-              <label className="block text-sm font-medium mb-2">
-                Lesson title
-              </label>
+              <label className="mb-2 block text-sm font-semibold text-foreground">Lesson title</label>
 
               <input
                 type="text"
                 placeholder="Lesson 4: Present Simple"
-                className="w-full bg-white dark:bg-gray-950 text-gray-900 dark:text-white border border-blue-100 dark:border-gray-700 rounded-xl px-4 py-3 outline-none focus:ring-2 focus:ring-blue-500"
+                className="input-field"
               />
             </div>
 
             <div>
-              <label className="block text-sm font-medium mb-2">
-                Kazakh explanation
-              </label>
+              <label className="mb-2 block text-sm font-semibold text-foreground">Kazakh explanation</label>
 
               <textarea
                 placeholder="Қазақша түсіндіру..."
-                className="w-full bg-white dark:bg-gray-950 text-gray-900 dark:text-white border border-blue-100 dark:border-gray-700 rounded-xl px-4 py-3 min-h-28 outline-none focus:ring-2 focus:ring-blue-500"
+                className="input-field min-h-28 resize-y"
               />
             </div>
 
             <div>
-              <label className="block text-sm font-medium mb-2">
-                Russian explanation
-              </label>
+              <label className="mb-2 block text-sm font-semibold text-foreground">Russian explanation</label>
 
               <textarea
                 placeholder="Русское объяснение..."
-                className="w-full bg-white dark:bg-gray-950 text-gray-900 dark:text-white border border-blue-100 dark:border-gray-700 rounded-xl px-4 py-3 min-h-28 outline-none focus:ring-2 focus:ring-blue-500"
+                className="input-field min-h-28 resize-y"
               />
             </div>
 
             <div>
-              <label className="block text-sm font-medium mb-2">
-                Upload material
-              </label>
+              <label className="mb-2 block text-sm font-semibold text-foreground">Upload material</label>
 
-              <input
-                type="file"
-                className="w-full bg-white dark:bg-gray-950 text-gray-900 dark:text-white border border-blue-100 dark:border-gray-700 rounded-xl px-4 py-3"
-              />
+              <input type="file" className="input-field py-2 file:mr-4 file:rounded-lg file:border-0 file:bg-accent-soft file:px-4 file:py-2 file:text-sm file:font-semibold file:text-accent-soft-fg" />
             </div>
 
-            <button
-              type="button"
-              className="bg-blue-600 text-white rounded-xl py-3 font-medium hover:bg-blue-700 transition"
-            >
+            <button type="button" className="btn-primary rounded-xl py-3 text-sm">
               Save lesson
             </button>
           </form>

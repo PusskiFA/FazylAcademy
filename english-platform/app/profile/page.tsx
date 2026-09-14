@@ -2,6 +2,7 @@
 
 import { courses } from "@/data/courses";
 import { lessons } from "@/data/lessons";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 
 type User = {
@@ -83,118 +84,106 @@ export default function ProfilePage() {
     totalLessons === 0 ? 0 : Math.round((completedCount / totalLessons) * 100);
 
   return (
-    <main className="min-h-screen bg-gradient-to-b from-blue-50 via-white to-blue-50 dark:from-gray-950 dark:via-gray-900 dark:to-gray-950 text-gray-900 dark:text-white transition-colors">
-      <section className="max-w-5xl mx-auto px-6 py-14">
-        <div className="mb-10">
-          <p className="text-blue-600 dark:text-blue-300 font-semibold mb-2">
+    <main className="page-shell">
+      <section className="mx-auto max-w-5xl px-6 py-14 md:py-16">
+        <div className="mb-12 max-w-2xl">
+          <p className="font-display mb-3 text-sm font-semibold uppercase tracking-widest text-accent">
             Profile
           </p>
 
-          <h1 className="text-4xl font-bold mb-3">My profile</h1>
+          <h1 className="font-display text-4xl font-semibold tracking-tight text-foreground md:text-5xl mb-4">
+            My profile
+          </h1>
 
-          <p className="text-gray-600 dark:text-gray-300">
+          <p className="text-muted text-lg leading-relaxed">
             Бұл жерде сен аккаунт ақпаратын және оқу прогрессін көресің.
           </p>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-6 mb-8">
-          <div className="md:col-span-1 bg-white dark:bg-gray-900 border border-blue-100 dark:border-gray-800 rounded-3xl p-6 shadow-sm text-center">
-            <div className="w-24 h-24 mx-auto rounded-full bg-blue-100 dark:bg-blue-900/40 flex items-center justify-center text-4xl mb-5">
-              👤
+        <div className="mb-8 grid gap-6 md:grid-cols-3">
+          <div className="rounded-3xl border border-border bg-card p-8 text-center shadow-sm md:col-span-1">
+            <div className="font-display mx-auto mb-5 flex h-24 w-24 items-center justify-center rounded-full bg-accent-soft text-3xl text-accent">
+              {user.name?.charAt(0)?.toUpperCase() ?? "?"}
             </div>
 
-            <h2 className="text-2xl font-bold mb-1">{user.name}</h2>
+            <h2 className="font-display text-2xl font-semibold text-foreground">{user.name}</h2>
 
-            <p className="text-gray-600 dark:text-gray-300 mb-5">
-              {user.email}
-            </p>
+            <p className="mb-5 mt-2 text-muted">{user.email}</p>
 
             <span
               className={
                 user.isPremium
-                  ? "inline-block bg-yellow-100 dark:bg-yellow-900/40 text-yellow-700 dark:text-yellow-300 px-4 py-2 rounded-full font-semibold"
-                  : "inline-block bg-blue-100 dark:bg-blue-900/40 text-blue-700 dark:text-blue-300 px-4 py-2 rounded-full font-semibold"
+                  ? "badge-premium"
+                  : "inline-block rounded-full bg-accent-soft px-4 py-2 text-sm font-semibold text-accent-soft-fg"
               }
             >
               {user.isPremium ? "Premium user" : "Free user"}
             </span>
           </div>
 
-          <div className="md:col-span-2 bg-white dark:bg-gray-900 border border-blue-100 dark:border-gray-800 rounded-3xl p-6 shadow-sm">
-            <h2 className="text-2xl font-bold mb-5">Learning stats</h2>
+          <div className="rounded-3xl border border-border bg-card p-6 shadow-sm md:col-span-2 md:p-8">
+            <h2 className="font-display mb-6 text-2xl font-semibold text-foreground">Learning stats</h2>
 
-            <div className="grid sm:grid-cols-3 gap-4 mb-6">
-              <div className="bg-blue-50 dark:bg-blue-900/30 rounded-2xl p-4">
-                <p className="text-gray-600 dark:text-gray-300 text-sm">
-                  Completed
-                </p>
-                <h3 className="text-3xl font-bold text-blue-600 dark:text-blue-300">
-                  {completedCount}
-                </h3>
+            <div className="mb-6 grid gap-4 sm:grid-cols-3">
+              <div className="rounded-2xl border border-border/60 bg-accent-soft/40 p-4 dark:bg-accent-soft/15">
+                <p className="text-sm text-muted">Completed</p>
+                <h3 className="font-display text-3xl font-semibold text-accent">{completedCount}</h3>
               </div>
 
-              <div className="bg-blue-50 dark:bg-blue-900/30 rounded-2xl p-4">
-                <p className="text-gray-600 dark:text-gray-300 text-sm">
-                  Total
-                </p>
-                <h3 className="text-3xl font-bold text-blue-600 dark:text-blue-300">
-                  {totalLessons}
-                </h3>
+              <div className="rounded-2xl border border-border/60 bg-accent-soft/40 p-4 dark:bg-accent-soft/15">
+                <p className="text-sm text-muted">Total</p>
+                <h3 className="font-display text-3xl font-semibold text-accent">{totalLessons}</h3>
               </div>
 
-              <div className="bg-blue-50 dark:bg-blue-900/30 rounded-2xl p-4">
-                <p className="text-gray-600 dark:text-gray-300 text-sm">
-                  Progress
-                </p>
-                <h3 className="text-3xl font-bold text-blue-600 dark:text-blue-300">
-                  {progress}%
-                </h3>
+              <div className="rounded-2xl border border-border/60 bg-accent-soft/40 p-4 dark:bg-accent-soft/15">
+                <p className="text-sm text-muted">Progress</p>
+                <h3 className="font-display text-3xl font-semibold text-accent">{progress}%</h3>
               </div>
             </div>
 
-            <div className="w-full bg-blue-100 dark:bg-gray-800 rounded-full h-4 overflow-hidden mb-4">
+            <div className="mb-4 h-4 w-full overflow-hidden rounded-full bg-accent-soft">
               <div
-                className="bg-blue-600 h-4 rounded-full transition-all"
+                className="h-4 rounded-full bg-accent transition-[width] duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]"
                 style={{ width: `${progress}%` }}
               />
             </div>
 
-            <p className="text-gray-600 dark:text-gray-300">
+            <p className="text-muted">
               Сен {completedCount}/{totalLessons} сабақты аяқтадың.
             </p>
           </div>
         </div>
 
-        <div className="bg-white dark:bg-gray-900 border border-blue-100 dark:border-gray-800 rounded-3xl p-6 shadow-sm">
-          <h2 className="text-2xl font-bold mb-5">Account actions</h2>
+        <div className="rounded-3xl border border-border bg-card p-6 shadow-sm md:p-8">
+          <h2 className="font-display mb-6 text-2xl font-semibold text-foreground">Account actions</h2>
 
-          <div className="grid sm:grid-cols-4 gap-4">
-            <a
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            <Link
               href="/dashboard"
-              className="block text-center bg-blue-600 text-white rounded-xl py-3 font-semibold hover:bg-blue-700 transition"
+              className="btn-primary block rounded-xl py-3 text-center text-sm"
             >
               Dashboard
-            </a>
+            </Link>
 
             <button
               type="button"
               onClick={upgradeToPremium}
-              className="block text-center bg-yellow-500 text-white rounded-xl py-3 font-semibold hover:bg-yellow-600 transition"
+              className="btn-primary block w-full rounded-xl py-3 text-center text-sm"
             >
               Upgrade
             </button>
 
-            <a
+            <Link
               href="/certificate"
-              className="block text-center bg-green-600 text-white rounded-xl py-3 font-semibold hover:bg-green-700 transition"
+              className="block w-full rounded-xl bg-deep py-3 text-center text-sm font-semibold text-on-deep transition-colors duration-300 hover:bg-deep-hover"
             >
               Certificate
-            </a>
+            </Link>
 
             <button
               type="button"
               onClick={logout}
-              className="block text-center bg-red-500 text-white rounded-xl py-3 font-semibold hover:bg-red-600 transition"
+              className="block w-full rounded-xl border border-rose-600/50 bg-rose-600 py-3 text-center text-sm font-semibold text-white transition-colors duration-300 hover:bg-rose-700"
             >
               Logout
             </button>

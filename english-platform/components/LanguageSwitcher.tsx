@@ -20,39 +20,27 @@ export default function LanguageSwitcher() {
   }
 
   return (
-    <div className="flex items-center gap-1 bg-blue-50 rounded-xl p-1">
+    <div className="segment dark:border-border/80" role="group" aria-label="Language">
       <button
         type="button"
+        data-active={language === "kz"}
         onClick={() => changeLanguage("kz")}
-        className={
-          language === "kz"
-            ? "bg-blue-600 text-white px-3 py-1 rounded-lg text-sm font-semibold"
-            : "text-blue-600 px-3 py-1 rounded-lg text-sm font-semibold"
-        }
       >
         KZ
       </button>
 
       <button
         type="button"
+        data-active={language === "ru"}
         onClick={() => changeLanguage("ru")}
-        className={
-          language === "ru"
-            ? "bg-blue-600 text-white px-3 py-1 rounded-lg text-sm font-semibold"
-            : "text-blue-600 px-3 py-1 rounded-lg text-sm font-semibold"
-        }
       >
         RU
       </button>
 
       <button
         type="button"
+        data-active={language === "en"}
         onClick={() => changeLanguage("en")}
-        className={
-          language === "en"
-            ? "bg-blue-600 text-white px-3 py-1 rounded-lg text-sm font-semibold"
-            : "text-blue-600 px-3 py-1 rounded-lg text-sm font-semibold"
-        }
       >
         EN
       </button>
